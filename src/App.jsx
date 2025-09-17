@@ -1,3 +1,4 @@
+import Users from "./users";
 import Batsman from "./batsman";
 import "./App.css";
 
@@ -16,9 +17,10 @@ function App() {
   }
   return (
     <>
+      <h3>Vite + React</h3>
+      <Users></Users>
       <Batsman></Batsman>
 
-      <h3>Vite + React</h3>
       <button onClick={handleClick}>Click Me</button>
       <button
         onClick={function handleClick2() {
