@@ -43,3 +43,10 @@
 .read-the-docs {
   color: #888;
 }
+
+.card2 {
+  padding: 2em;
+  border: 2px solid rgb(0, 255, 106);
+  margin: 20px;
+  border-radius: 20px;
+}

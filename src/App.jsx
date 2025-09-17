@@ -1,8 +1,23 @@
 import Users from "./users";
 import Batsman from "./batsman";
 import "./App.css";
+import { Suspense, use } from "react";
+import Friends from "./friends";
+import Posts from "./Posts";
+
+const fetchPosts = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+  return res.json();
+};
+
+const fetchFriends = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/users");
+  return res.json();
+};
 
 function App() {
+  const postsPromise = fetchPosts();
+  const friendsPromise = fetchFriends();
   const handleClick5 = (num) => {
     const newNum = num + 5;
     alert(newNum);
@@ -18,6 +33,14 @@ function App() {
   return (
     <>
       <h3>Vite + React</h3>
+      <Suspense fallback={<h3>All Posts are coming........</h3>}>
+        <Posts postsPromise={postsPromise}></Posts>
+      </Suspense>
+
+      <Suspense fallback={<h3>Friends are coming for treat...</h3>}>
+        <Friends friendsPromise={friendsPromise}></Friends>
+      </Suspense>
+
       <Users></Users>
       <Batsman></Batsman>
 
