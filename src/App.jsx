@@ -4,6 +4,12 @@ import "./App.css";
 import { Suspense, use } from "react";
 import Friends from "./friends";
 import Posts from "./Posts";
+import Albums from "./albums";
+
+const fetchAlbums = async () => {
+  const res = await fetch("https://jsonplaceholder.typicode.com/albums");
+  return res.json();
+};
 
 const fetchPosts = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -16,6 +22,7 @@ const fetchFriends = async () => {
 };
 
 function App() {
+  const albumsPromise = fetchAlbums();
   const postsPromise = fetchPosts();
   const friendsPromise = fetchFriends();
   const handleClick5 = (num) => {
@@ -33,6 +40,10 @@ function App() {
   return (
     <>
       <h3>Vite + React</h3>
+      <Suspense fallback={<h3>Albums are coming soon.......</h3>}>
+        <Albums albumsPromise={albumsPromise}></Albums>
+      </Suspense>
+
       <Suspense fallback={<h3>All Posts are coming........</h3>}>
         <Posts postsPromise={postsPromise}></Posts>
       </Suspense>
